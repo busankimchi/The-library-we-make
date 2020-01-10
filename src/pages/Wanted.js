@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Home = () => {
+const Wanted = () => {
     return (
         <div>
             <h2>
-                Home!
+                Wanted 게시판
             </h2>
         </div>
     );
 };
 
-export default Home;
+export default Wanted;

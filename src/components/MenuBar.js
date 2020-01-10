@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Menu = () => {
+const MenuBar = () => {
     const activeStyle = {
         color: 'green',
         fontSize: '2rem'
@@ -20,4 +20,4 @@ const Menu = () => {
     );
 };
 
-export default Menu;
+export default MenuBar;
