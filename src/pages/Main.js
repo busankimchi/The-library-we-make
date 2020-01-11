@@ -51,9 +51,9 @@ class Main extends Component {
         mql.addListener(this.mediaQueryChanged);
     }
 
-    componentWillUnmount() {
-        this.state.mql.removeListener(this.mediaQueryChanged);
-    }
+    // componentWillUnmount() {
+    //     this.state.mql.removeListener(this.mediaQueryChanged);
+    // }
 
     onSetSidebarOpen(open) {
         this.setState({ sidebarOpen: open });

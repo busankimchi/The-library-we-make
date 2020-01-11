@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
+import { cyan200, cyan400, cyan500 } from 'material-ui/styles/colors';
 import { shadow } from 'lib/styleUtils';
 
 
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     padding-top: 0.6rem;
     padding-bottom: 0.5rem;
 
-    background: ${oc.teal[6]};
+    background: ${cyan400};
     color: white;
 
     text-align: center;
@@ -21,12 +21,12 @@ const Wrapper = styled.div`
     transition: .2s all;
     border-radius : 20px;
     &:hover {
-        background: ${oc.teal[5]};
+        background: ${cyan200};
         ${shadow(0)}
     }
 
     &:active {
-        background: ${oc.teal[7]};
+        background: ${cyan500};
     }
 
 `;
