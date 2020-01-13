@@ -17,28 +17,24 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-  // console.log("postpost");
+
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
   if (!isValid) {
-    console.log('에러다');
     return res.status(400).json(errors);
   }
-  console.log(1234);
+
   User.findOne({ email: req.body.email }).then(user => {
-    console.log(111);
     if (user) {
-      console.log("ee");
       return res.status(400).json({ email: "Email already exists" });
     } else {
       const newUser = new User({
-        username: req.body.username,
+        name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        point: req.body.point
       });
-
-      console.log(newUser);
 
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
@@ -60,7 +56,7 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/login", (req, res) => {
   // Form validation
-
+  console.log("v");
   const { errors, isValid } = validateLoginInput(req.body);
 
   // Check validation
@@ -85,8 +81,7 @@ router.post("/login", (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          username: user.username
-          
+          name: user.name
         };
 
         // Sign token
@@ -111,5 +106,13 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+// router.get('/logout', (req, res) =>{
+//   console.log(123);
+// req.session
+//   // req.logout();
+//   res.redirect('/login');
+// });
+
 
 module.exports = router;
