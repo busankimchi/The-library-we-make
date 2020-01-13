@@ -8,6 +8,8 @@ import styled from 'styled-components';
 
 import { Header, Icon, Image, Menu, Segment, Sidebar, Grid } from 'semantic-ui-react'
 
+import SideBarContainer from '../containers/Sidebar/SideBarContainer';
+
 import {
     Collapse,
     Navbar,
@@ -22,7 +24,6 @@ import {
     DropdownItem,
     NavbarText
 } from 'reactstrap';
-import SideBarContainer from '../containers/Sidebar/SideBarContainer';
 
 
 const mql = window.matchMedia(`(min-width: 800px)`);
