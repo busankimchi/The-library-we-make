@@ -1,21 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { cyan400 } from 'material-ui/styles/colors';
 import { Route, Link } from 'react-router-dom';
 import { Library, Wanted, Borrow, Regibook } from 'pages';
 import SideBarProfile from 'components/SideBarProfile';
-import Sidebar from "react-sidebar";
+
 import styled from 'styled-components';
 
-/*
-import {
-    Header,
-    Menu,
-    Ref,
-    Icon,
-    Segment,
-    Sidebar
-} from 'semantic-ui-react';
-*/
+import { Header, Icon, Image, Menu, Segment, Sidebar, Grid } from 'semantic-ui-react';
+import SideBarContainer from '../containers/Sidebar/SideBarContainer';
 
 import {
     Collapse,
@@ -39,28 +30,30 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebarOpen: false,
-            sidebarDocked: mql.matches,
+
             isOpen: false,
+            width: 0,
+            height: 0,
         };
-        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
-    componentWillMount() {
-        mql.addListener(this.mediaQueryChanged);
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
     }
 
-    // componentWillUnmount() {
-    //     this.state.mql.removeListener(this.mediaQueryChanged);
-    // }
-
-    onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
-    mediaQueryChanged() {
-        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
+    toggleSidebar() {
+        this.setState({ isOpen: !this.state.isOpen });
     }
 
     render() {
@@ -70,21 +63,25 @@ class Main extends Component {
                 width: this.state.sideBarSize,
             },
         };
+        let profile = "";
+
+        if (!this.state.isOpen)
+            profile = "Open My Profile"
+        else profile = "Close My Profile"
 
         return (
-            <div>
-                <Container>
-                    <Sidebar
-                        sidebar={<SideBarProfile />}
-                        open={this.state.sidebarOpen}
-                        docked={this.state.sidebarDocked}
-                        onSetOpen={this.onSetSidebarOpen}
-                        styles={sidebarStyle}>
-
-                        <Navbar background={cyan400} expand="md">
+            <Container>
+                <SideBarContainer visible={this.state.isOpen}>
+                    <MainContainer>
+                        <Navbar color="light" light expand="md">
                             <NavbarBrand href="/main">우책공</NavbarBrand>
-                            <Collapse isOpen={this.state.isOpen} navbar>
+                            <Collapse isOpen={true} navbar>
                                 <Nav className="mr-auto" navbar>
+                                    <NavItem>
+                                        <NavLink tag={Link} onClick={this.toggleSidebar}>
+                                            {profile}
+                                        </NavLink>
+                                    </NavItem>
                                     <NavItem>
                                         <NavLink tag={Link} exact to="/main" >Library</NavLink>
                                     </NavItem>
@@ -101,15 +98,16 @@ class Main extends Component {
                                 <NavbarText>우책공</NavbarText>
                             </Collapse>
                         </Navbar>
+
                         <div>
                             <Route exact path="/main" component={Library} />
                             <Route path="/main/wanted" component={Wanted} />
                             <Route path="/main/borrow" component={Borrow} />
                             <Route path="/main/register" component={Regibook} />
                         </div>
-                    </Sidebar>
-                </Container>
-            </div>
+                    </MainContainer>
+                </SideBarContainer>
+            </Container>
         );
     }
 }
@@ -118,10 +116,17 @@ export default Main;
 
 const Container = styled.div`
   position: absolute;
-  top: 64;
-  left: 0;
   width: 100%;
   height: 100%;
   background: url(${process.env.PUBLIC_URL + '/sample2.png'});
 `;
+
+const MainContainer = styled.div`
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 800px;
+`
+
+
 

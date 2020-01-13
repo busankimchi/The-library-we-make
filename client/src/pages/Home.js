@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled, { createGlobalStyle, keyframes } from "styled-components";
 import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
 import { shadow } from 'lib/styleUtils';
 import { Link } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
@@ -36,15 +35,38 @@ const Logged = (props) => (
 );
 
 Logged.muiName = 'IconMenu';
+
 class Home extends Component {
-    state = {
-        logged: true,
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            logged: true,
+            width: 0,
+            height: 0,
+        }
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    }
 
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
     };
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
     render() {
+        console.log(this.state.width);
         return (
             <div>
                 <Container>
@@ -75,6 +97,15 @@ const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `
+const Container = styled.div`
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background: url(${process.env.PUBLIC_URL + '/sample.png'});
+`;
 const Wheal = styled.div`
     position: absolute;
     top: 30%;
@@ -86,14 +117,9 @@ const Wheal = styled.div`
     animation: ${rotate360} infinite 15s linear;
 `;
 
-const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(${process.env.PUBLIC_URL + '/sample.png'});
-`;
+
+
+
 
 const Positioner = styled.div`
     position: absolute;

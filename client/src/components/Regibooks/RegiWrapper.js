@@ -7,19 +7,19 @@ import { cyan400 } from 'material-ui/styles/colors';
 // 화면의 중앙에 위치시킨다
 const Positioner = styled.div`
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   
 `;
-const Containver = styled.div`
-    width: 1200px;
+const Container = styled.div`
+    width: 500px;
 `;
 
 // 너비, 그림자 설정
 const ShadowedBox = styled.div`
-    width: 1200px;
-    border-radius: 50px;
+    width: 500px;
+    border-radius: 35px;
     
     ${shadow(2)}
 `;
@@ -31,8 +31,8 @@ const LogoWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
 `;
 
 const Logo = styled(Link)
@@ -49,22 +49,22 @@ const Contents = styled.div`
     background: white;
     padding: 2rem;
     height: auto;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
 `;
 
 const RegiWrapper = ({ children }) => (
     <Positioner>
-        <Containver>
+        <Container>
             <ShadowedBox>
                 <LogoWrapper>
-                    <Logo to="/" > Register your book! </Logo>
+                    <Logo to="/" > Register your book!</Logo>
                 </LogoWrapper>
                 <Contents>
                     {children}
                 </Contents>
             </ShadowedBox >
-        </Containver>
+        </Container>
     </Positioner>
 );
 

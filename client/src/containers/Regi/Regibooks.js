@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
 import { RegiContent, InputWithLabel, RegiButton } from 'components/Regibooks';
+import { makeStyles } from '@material-ui/core/styles';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import ImageUploader from 'react-images-upload';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Regibooks } from '.';
 // import { registerUser } from "../../actions/authActions";
 
 
 
-class Register extends Component {
+class Regibooks extends Component {
 
     constructor() {
         super();
@@ -17,22 +19,25 @@ class Register extends Component {
             name: "",
             author: "",
             subject: "",
-            subject_category: "",
+            subject_category: "과목을 선택해주세여",
             register_user: "",
+            pictures: [],
             errors: {}
         };
+        this.onDrop = this.onDrop.bind(this);
     }
+    handleChange = (event, index, subject_category) => this.setState({ subject_category });
+    // componentDidMount() {
+    // }
 
-    componentDidMount() {
-        // 실행되기전, register_user를 redux로 부터 받아와야 한다.
+
+    // componentWillReceiveProps(nextProps) {
+    // }
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
     }
-
-
-    componentWillReceiveProps(nextProps) {
-        // 컴포넌트가 prop 을 새로 받았을 때 실행됩니다.
-        // prop 에 따라 state 를 업데이트 해야 할 때 사용하면 유용합니다.
-    }
-
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -51,10 +56,18 @@ class Register extends Component {
 
 
     render() {
+        console.log(this.state);
         const { errors } = this.state;
         return (
-            <RegiContent title="Register your books!">
+            <RegiContent title="Take a picture of your book">
                 <form onSubmit={this.onSubmit}>
+                    <ImageUploader
+                        withIcon={true}
+                        buttonText='Choose images'
+                        onChange={this.onDrop}
+                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        maxFileSize={5242880}
+                    />
                     <InputWithLabel
                         label="책 이름"
                         name="name"
@@ -83,7 +96,19 @@ class Register extends Component {
                         id="subject"
                         type="subject"
                     />
-                    <RegiButton onClick={this.onSubmit}>Register</RegiButton>
+                    <br />
+                    <h4>Choose a subject category</h4>
+                    <DropDownMenu value={this.state.subject_category} onChange={this.handleChange} style={styles.customWidth} autoWidth={false}>
+                        <MenuItem value={1} primaryText="전공필수" />
+                        <MenuItem value={2} primaryText="전공선택" />
+                        <MenuItem value={3} primaryText="기초필수" />
+                        <MenuItem value={4} primaryText="기초선택" />
+                        <MenuItem value={5} primaryText="교양" />
+                        <MenuItem value={6} primaryText="기타" />
+                    </DropDownMenu>
+                    <h3>Your QR ID is</h3>
+                    <h4>{this.props.match.params.id}</h4>
+                    <RegiButton onClick={this.onSubmit}>Register!</RegiButton>
                 </form>
             </RegiContent>
         );
@@ -91,6 +116,11 @@ class Register extends Component {
 }
 export default Regibooks;
 
+const styles = {
+    customWidth: {
+        width: 200,
+    },
+};
 // Register.propTypes = {
 //     registerUser: PropTypes.func.isRequired,
 //     auth: PropTypes.object.isRequired,
