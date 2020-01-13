@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, Icon, Image, Grid, Popup } from 'semantic-ui-react'
 
 const extra = (
@@ -9,7 +9,7 @@ const extra = (
 )
 
 
-const Library = () => (
+const Book = (props) => (
     <Popup
         content='Sample'
         trigger={
@@ -23,5 +23,49 @@ const Library = () => (
         position='right center'
     />
 );
+
+
+class Library extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bookList: [
+                {
+                    image: "",
+                    header: "",
+                    meta: "",   
+                }
+            ],
+        }
+    }
+
+    getBookList = () => {
+        this.setState()
+    }
+
+    componentWillMount() {
+        this.getBookList();
+    }
+    
+
+    render() {
+        return (
+            <Grid columns={5} container>
+                <Grid.Row>
+                    {this.state.bookList.map((book) => {
+                        return (
+                            <Grid.Column>
+                                <Book />
+                            </Grid.Column>
+                        )
+                    })}
+                    
+
+                </Grid.Row>
+            </Grid>
+        )
+    }
+}
+
 
 export default Library;

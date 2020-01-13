@@ -19,7 +19,7 @@ class Auth extends Component {
                     <AuthWrapper>
 
                         <Route path="/auth/login" component={Login} />
-                        <Route path="/auth/register" component={Register} /> 
+                        <Route path="/auth/register" component={Register} />
                         <Switch>
                             <PrivateRoute exact path="/main/dashboard" component={Dashboard} />
                         </Switch>

@@ -36,11 +36,11 @@ const Wrapper = styled.div`
 // };
 
 
-const AuthButton = ({children, onClick}) => (
-        <Wrapper onClick={onClick}>
-                 {children}
-                 </Wrapper>
-   
+const AuthButton = ({ children, onClick }) => (
+    <Wrapper onClick={onClick}>
+        {children}
+    </Wrapper>
+
 );
 
 //how to submit?

@@ -108,7 +108,8 @@ const MainContainer = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 800px;
+    height: 700px;
+    overflow-y: auto;
 `
 
 export default Main;

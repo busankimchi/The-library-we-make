@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 
 const SideBarContainer = ({ visible, children }) => {
-
     return (
         <Sidebar.Pushable as={Segment}>
             <Sidebar
@@ -15,21 +14,20 @@ const SideBarContainer = ({ visible, children }) => {
                 vertical
                 visible={visible}
                 width='thin'>
+                    <Menu.Item as='a'>
+                        <Icon name='home' />
+                        My Profile
+                    </Menu.Item>
 
-                <Menu.Item as='a'>
-                    <Icon name='home' />
-                    My Profile
+                    <Menu.Item as='a'>
+                        <Icon name='gamepad' />
+                        Games
+                    </Menu.Item>
 
-                </Menu.Item>
 
-                <Menu.Item as='a'>
-                    <Icon name='gamepad' />
-                    Games
-                </Menu.Item>
-
-                <Menu.Item as='a'>
-                    <Icon name='camera' />
-                    Channels
+                    <Menu.Item as='a'>
+                        <Icon name='sign out' />
+                        Sign Out
                 </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher>
@@ -40,8 +38,8 @@ const SideBarContainer = ({ visible, children }) => {
     )
 }
 
-const StyledSidebar = styled.div`
-
+const StyledSidebarContainer = styled(SideBarContainer)`
+    height: 900px;
 `
 
 export default SideBarContainer;
