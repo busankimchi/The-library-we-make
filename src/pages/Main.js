@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 
 import { Route, Link } from 'react-router-dom';
-import { Library, Wanted } from 'pages';
+import { Library, Wanted, Borrow, Regibook } from 'pages';
 import SideBarProfile from 'components/SideBarProfile';
 import Sidebar from "react-sidebar";
+import AppBar from 'material-ui/AppBar';
 import styled from 'styled-components';
 
 /*
@@ -72,35 +73,59 @@ class Main extends Component {
         };
 
         return (
-            <Sidebar
-                sidebar={<SideBarProfile />}
-                open={this.state.sidebarOpen}
-                docked={this.state.sidebarDocked}
-                onSetOpen={this.onSetSidebarOpen}
-                styles={sidebarStyle}>
+            <div>
+                <AppBar
+                    title="우리들의 작은 도서관"
+                />
+                <Container>
+                    <Sidebar
+                        sidebar={<SideBarProfile />}
+                        open={this.state.sidebarOpen}
+                        docked={this.state.sidebarDocked}
+                        onSetOpen={this.onSetSidebarOpen}
+                        styles={sidebarStyle}>
 
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/main">우책공</NavbarBrand>
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <NavLink tag={Link} exact to="/main" >Library</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} exact to="/main/wanted" >Wanted</NavLink>
-                            </NavItem>
-                        </Nav>
-                        <NavbarText>우책공</NavbarText>
-                    </Collapse>
-                </Navbar>
-                <div>
-                    <Route exact path="/main" component={Library} />
-                    <Route path="/main/wanted" component={Wanted} />
-                </div>
-            </Sidebar>
+                        <Navbar color="light" light expand="md">
+                            <NavbarBrand href="/main">우책공</NavbarBrand>
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="mr-auto" navbar>
+                                    <NavItem>
+                                        <NavLink tag={Link} exact to="/main" >Library</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} exact to="/main/wanted" >Wanted</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} exact to="/main/borrow" >Borrow</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink tag={Link} exact to="/main/regibook" >Register book</NavLink>
+                                    </NavItem>
+                                </Nav>
+                                <NavbarText>우책공</NavbarText>
+                            </Collapse>
+                        </Navbar>
+                        <div>
+                            <Route exact path="/main" component={Library} />
+                            <Route path="/main/wanted" component={Wanted} />
+                            <Route path="/main/borrow" component={Borrow} />
+                            <Route path="/main/regibook" component={Regibook} />
+                        </div>
+                    </Sidebar>
+                </Container>
+            </div>
         );
     }
 }
 
 export default Main;
+
+const Container = styled.div`
+  position: absolute;
+  top: 64;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(${process.env.PUBLIC_URL + '/sample2.png'});
+`;
 
