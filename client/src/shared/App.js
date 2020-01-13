@@ -41,9 +41,13 @@ class App extends Component {
                     <div>
                         <Route exact path="/" component={Home} />
                         <Route path="/auth" component={Auth} />
-                        <Route path="/main" component={Main} />
+                        {/* <Route path="/main" component={Main} /> */}
+                        <Switch>
+                            <PrivateRoute exact path="/main" component={Main} />
+                        </Switch>
                     </div>
                 </MuiThemeProvider>
+
             </Provider>
         );
     }

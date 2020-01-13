@@ -1,6 +1,10 @@
 import React, { Component, Fragment, useState } from 'react';
 import { Header, Icon, Image, Menu, Segment, Sidebar, Grid, Dropdown, Button, Divider } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+import PropTypes from "prop-types";
+
 
 
 const signOut = () => {
@@ -73,12 +77,18 @@ const SideBarContainer = ({ visible, children }) => {
 */
 
 class SideBarContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {};
+    // }
 
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
+      
     render() {
+        // const { user } = this.props.auth;
         return (
             <Sidebar.Pushable as={Segment}>
                 <Sidebar
@@ -121,14 +131,16 @@ class SideBarContainer extends Component {
 
                     <Menu.Item as='a'>
                         <Icon.Group>
-                            <Icon name='sticky note' />
+                            <Icon name='sticky note' 
+          
+                            />
                             <Icon corner='bottom right' name='arrow left' />
                         </Icon.Group>
                         Check Note
                     </Menu.Item>
 
                     <Menu.Item
-                        onClick={signOut}>
+                        onClick={this.onLogoutClick}>
                         <Icon name='sign out' />
                         Sign Out
                     </Menu.Item>
@@ -145,6 +157,16 @@ class SideBarContainer extends Component {
 const StyledSidebarContainer = styled(SideBarContainer)`
     height: 900px;
 `
+SideBarContainer.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
 
-export default SideBarContainer;
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
 
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(SideBarContainer);

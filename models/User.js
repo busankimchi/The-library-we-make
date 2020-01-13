@@ -18,5 +18,12 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   }
+
+  // list : [
+  //   info: {
+  //     person : String,
+
+  //   },
+  // ]
 });
 module.exports = User = mongoose.model("users", UserSchema);

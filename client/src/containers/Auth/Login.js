@@ -9,6 +9,7 @@ import classnames from "classnames";
 
 class Login extends Component {
 
+
   constructor() {
     super();
     this.state = {
@@ -53,7 +54,6 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
       <AuthContent title="로그인">
         <InputWithLabel
