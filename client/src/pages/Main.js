@@ -68,8 +68,8 @@ class Main extends Component {
         let profile = "";
 
         if (!this.state.isOpen)
-            profile = "Open My Profile"
-        else profile = "Close My Profile"
+            profile = "Open My Info"
+        else profile = "Close My Info"
 
         return (
             <SideBarContainer visible={this.state.isOpen}>
