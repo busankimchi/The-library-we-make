@@ -15,7 +15,7 @@ const StyledLink = styled(Link)`
     }
 `
 
-const RightAlignedLink = ({to, children}) => (
+const RightAlignedLink = ({ to, children }) => (
     <Aligner>
         <StyledLink to={to}>{children}</StyledLink>
     </Aligner>

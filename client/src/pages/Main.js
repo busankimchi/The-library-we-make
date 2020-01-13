@@ -30,7 +30,6 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             isOpen: false,
             width: 0,
             height: 0,
@@ -66,11 +65,11 @@ class Main extends Component {
         let profile = "";
 
         if (!this.state.isOpen)
-            profile = "Open My Profile"
-        else profile = "Close My Profile"
+            profile = "Open My Info"
+        else profile = "Close My Info"
 
         return (
-            <Container>
+            <div>
                 <SideBarContainer visible={this.state.isOpen}>
                     <MainContainer>
                         <Navbar color="light" light expand="md">
@@ -88,26 +87,21 @@ class Main extends Component {
                                     <NavItem>
                                         <NavLink tag={Link} exact to="/main/wanted" >Wanted</NavLink>
                                     </NavItem>
-                                    <NavItem>
-                                        <NavLink tag={Link} exact to="/main/borrow" >Borrow</NavLink>
-                                    </NavItem>
-                                    <NavItem>
-                                        <NavLink tag={Link} exact to="/main/register" >Register book</NavLink>
-                                    </NavItem>
                                 </Nav>
                                 <NavbarText>우책공</NavbarText>
                             </Collapse>
                         </Navbar>
-
                         <div>
-                            <Route exact path="/main" component={Library} />
-                            <Route path="/main/wanted" component={Wanted} />
-                            <Route path="/main/borrow" component={Borrow} />
-                            <Route path="/main/register" component={Regibook} />
+                            <Container>
+                                <Route exact path="/main" component={Library} />
+                                <Route path="/main/wanted" component={Wanted} />
+                                <Route path="/main/borrow" component={Borrow} />
+                                <Route path="/main/register" component={Regibook} />
+                            </Container>
                         </div>
                     </MainContainer>
                 </SideBarContainer>
-            </Container>
+            </div>
         );
     }
 }
@@ -125,7 +119,8 @@ const MainContainer = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 800px;
+    height: 967px;
+    overflow-y: auto;
 `
 
 

@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const passport=require("passport");
+const passport = require("passport");
 
 
-const users=require("./routes/api/users");
+const users = require("./routes/api/users");
 
 
 const app = express();
@@ -34,7 +34,7 @@ mongoose
 
 
 
-  // Passport config
+// Passport config
 
 // require('dotenv').config;
 // mongoose.connect(process.env.MONGO_URI, {

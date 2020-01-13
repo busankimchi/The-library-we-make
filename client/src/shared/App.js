@@ -42,9 +42,6 @@ class App extends Component {
                         <Route path="/main" component={Main} />
                     </div>
                 </MuiThemeProvider>
-                <Switch>
-              <PrivateRoute exact path="/main" component={Main} />
-            </Switch>
             </Provider>
         );
     }
