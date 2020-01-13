@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+import { cyan400 } from 'material-ui/styles/colors';
 import { Route, Link } from 'react-router-dom';
 import { Library, Wanted, Borrow, Regibook } from 'pages';
 import SideBarProfile from 'components/SideBarProfile';
@@ -81,7 +81,7 @@ class Main extends Component {
                         onSetOpen={this.onSetSidebarOpen}
                         styles={sidebarStyle}>
 
-                        <Navbar color="light" light expand="md">
+                        <Navbar background={cyan400} expand="md">
                             <NavbarBrand href="/main">우책공</NavbarBrand>
                             <Collapse isOpen={this.state.isOpen} navbar>
                                 <Nav className="mr-auto" navbar>
