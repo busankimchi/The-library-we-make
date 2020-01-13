@@ -3,19 +3,10 @@ import React, { Component, Fragment } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { Library, Wanted } from 'pages';
 import SideBarProfile from 'components/SideBarProfile';
-import Sidebar from "react-sidebar";
+//import Sidebar from "react-sidebar";
 import styled from 'styled-components';
 
-/*
-import {
-    Header,
-    Menu,
-    Ref,
-    Icon,
-    Segment,
-    Sidebar
-} from 'semantic-ui-react';
-*/
+import { Header, Icon, Image, Menu, Segment, Sidebar, Grid } from 'semantic-ui-react'
 
 import {
     Collapse,
@@ -31,6 +22,7 @@ import {
     DropdownItem,
     NavbarText
 } from 'reactstrap';
+import SideBarContainer from '../containers/Sidebar/SideBarContainer';
 
 
 const mql = window.matchMedia(`(min-width: 800px)`);
@@ -39,28 +31,29 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sidebarOpen: false,
-            sidebarDocked: mql.matches,
             isOpen: false,
+            width: 0,
+            height: 0,
         };
-        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
-    componentWillMount() {
-        mql.addListener(this.mediaQueryChanged);
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
     }
 
-    // componentWillUnmount() {
-    //     this.state.mql.removeListener(this.mediaQueryChanged);
-    // }
-
-    onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
     }
 
-    mediaQueryChanged() {
-        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+    updateWindowDimensions() {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    }
+
+    toggleSidebar() {
+        this.setState({ isOpen: !this.state.isOpen });
     }
 
     render() {
@@ -71,36 +64,51 @@ class Main extends Component {
             },
         };
 
-        return (
-            <Sidebar
-                sidebar={<SideBarProfile />}
-                open={this.state.sidebarOpen}
-                docked={this.state.sidebarDocked}
-                onSetOpen={this.onSetSidebarOpen}
-                styles={sidebarStyle}>
+        let profile = "";
 
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/main">우책공</NavbarBrand>
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <NavLink tag={Link} exact to="/main" >Library</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} exact to="/main/wanted" >Wanted</NavLink>
-                            </NavItem>
-                        </Nav>
-                        <NavbarText>우책공</NavbarText>
-                    </Collapse>
-                </Navbar>
-                <div>
-                    <Route exact path="/main" component={Library} />
-                    <Route path="/main/wanted" component={Wanted} />
-                </div>
-            </Sidebar>
+        if (!this.state.isOpen)
+            profile = "Open My Profile"
+        else profile = "Close My Profile"
+
+        return (
+            <SideBarContainer visible={this.state.isOpen}>
+                <MainContainer>
+                    <Navbar color="light" light expand="md">
+                        <NavbarBrand href="/main">우책공</NavbarBrand>
+                        <Collapse isOpen={true} navbar>
+                            <Nav className="mr-auto" navbar>
+                                <NavItem>
+                                    <NavLink tag={Link} onClick={this.toggleSidebar}>
+                                        {profile}
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} exact to="/main" >Library</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} exact to="/main/wanted" >Wanted</NavLink>
+                                </NavItem>
+                            </Nav>
+                            <NavbarText>우책공</NavbarText>
+                        </Collapse>
+                    </Navbar>
+
+                    <div>
+                        <Route exact path="/main" component={Library} />
+                        <Route path="/main/wanted" component={Wanted} />
+                    </div>
+                </MainContainer>
+            </SideBarContainer>
         );
     }
 }
+
+const MainContainer = styled.div`
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 800px;
+`
 
 export default Main;
 
