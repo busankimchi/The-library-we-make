@@ -1,53 +1,47 @@
 {
   "name": "nssj",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "wook",
+  "license": "ISC",
   "dependencies": {
     "@material-ui/core": "^4.8.3",
-    "@stardust-ui/docs-components": "^0.38.2",
-    "@stardust-ui/react": "^0.40.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "bootstrap": "^4.4.1",
-    "material-ui": "^0.20.2",
-    "node-gyp": "^6.1.0",
-    "open-color": "^1.7.0",
-    "prettier": "^1.19.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "axios": "^0.19.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "concurrently": "^5.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
+    "mongoose": "^5.8.7",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
-    "react-sidebar": "^3.0.2",
-    "reactstrap": "^8.2.0",
-    "rebuild": "^0.1.2",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2",
-    "styled-components": "^4.4.1"
-  },
-  "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "validator": "^12.1.0"
   },
   "devDependencies": {
-    "@babel/preset-stage-1": "^7.0.0",
-    "cross-env": "^6.0.3"
-  }
+    "nodemon": "^2.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/busankimchi/MadCamp_NSSJ.git"
+  },
+  "bugs": {
+    "url": "https://github.com/busankimchi/MadCamp_NSSJ/issues"
+  },
+  "homepage": "https://github.com/busankimchi/MadCamp_NSSJ#readme"
 }
