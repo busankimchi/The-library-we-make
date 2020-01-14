@@ -24,6 +24,7 @@ class Regibooks extends Component {
             subject: "",
             subject_category: "과목을 선택해주세여",
             register_user: "", //이걸 유저정보로.
+            current_user: "",
             pictures: [],
             errors: {}
         };
@@ -49,16 +50,21 @@ class Regibooks extends Component {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
-        console.log("submit")
+        
+        // console.log("submit")
         e.preventDefault();
         const newBook = {
             QRid: this.props.match.params.id,
+            image: this.state.pictures,
             name: this.state.name,
             author: this.state.author,
             subject: this.state.subject,
             subject_category: this.state.subject_category,
-            // register_user: this.state.register_user,
+            register_user: this.props.auth.user.username,
+            current_user: this.props.auth.user.username,
+            register_userid: this.props.auth.user.id
         };
+
         this.props.registerBook(newBook, this.props.history);
 
     };
@@ -68,12 +74,9 @@ class Regibooks extends Component {
     }
 
     render() {
-        const {user}=this.props.auth;
-        console.log(user.username)
-
-        // console.log(this.state.auth);
+        console.log(this.state.pictures)
         const { errors } = this.state;
-        return (
+        return (    
             <RegiContent title="Take a picture of your book">
                 <form onSubmit={this.onSubmit}>
                     <ImageUploader
@@ -81,6 +84,7 @@ class Regibooks extends Component {
                         buttonText='Choose images'
                         onChange={this.onDrop}
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        withPreview={true}
                         maxFileSize={5242880}
                     />
                     <InputWithLabel
@@ -114,15 +118,13 @@ class Regibooks extends Component {
                     <br />
                     <h4>Choose a subject category</h4>
                     <DropDownMenu value={this.state.subject_category} onChange={this.handleChange} style={styles.customWidth} autoWidth={false}>
-                        <MenuItem value={1} primaryText="전공필수" />
-                        <MenuItem value={2} primaryText="전공선택" />
-                        <MenuItem value={3} primaryText="기초필수" />
-                        <MenuItem value={4} primaryText="기초선택" />
-                        <MenuItem value={5} primaryText="교양" />
-                        <MenuItem value={6} primaryText="기타" />
+                        <MenuItem value={"전공필수"} primaryText="전공필수" />
+                        <MenuItem value={"전공선택"} primaryText="전공선택" />
+                        <MenuItem value={"기초필수"} primaryText="기초필수" />
+                        <MenuItem value={"기초선택"} primaryText="기초선택" />
+                        <MenuItem value={"교양"} primaryText="교양" />
+                        <MenuItem value={"기타"} primaryText="기타" />
                     </DropDownMenu>
-                    <h3>Your QR ID is</h3>
-                    <h4>{this.props.match.params.id}</h4>
                     <RegiButton onClick={this.onSubmit}>Register!</RegiButton>
                 </form>
             </RegiContent>

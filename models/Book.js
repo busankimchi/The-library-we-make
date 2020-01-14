@@ -59,7 +59,12 @@ const BookSchema = new Schema({
   register_user: {
     type: String,
     required: false
-  }, //추가 할 것.
+  },
+  register_userid: {
+    type: String,
+    required: false
+  },
+  //추가 할 것.
   // borrower: {
   //   type: String,
   //   required: false

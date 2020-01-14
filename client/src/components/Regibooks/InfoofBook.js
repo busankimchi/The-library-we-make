@@ -73,7 +73,7 @@ class InfoofBook extends Component {
                             <EmojiEmotionsIcon />
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Registerer" secondary={this.props.registerer} />
+                    <ListItemText primary="Current Owner" secondary={this.props.currentowner} />
                 </ListItem>
                 </li>
             </List>

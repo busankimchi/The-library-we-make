@@ -36,6 +36,7 @@ router.post("/upload", (req, res)=>{
                 status: req.body.status,
                 current_user: req.body.current_user,
                 register_user: req.body.register_user,
+                register_userid: req.body.register_userid,
                 register_date: req.body.register_date,
                 fee: req.body.fee,
                 QRid: req.body.QRid
@@ -152,10 +153,10 @@ router.get('/:book_register_user', (req, res) =>{
 });
 
 //빌리고 현재 소유자 설정
-router.put('/borrow/:QRid', (req, res)=>{
+router.post('/borrow', (req, res)=>{
     console.log(123456)
 
-    Book.findOne({QRid: req.params.QRid}, (err, docs)=>{
+    Book.findOne({QRid: req.body.QRid}, (err, docs)=>{
         if(!err){
             // const docs=doc[0]
             // console.log(typeof: docs)
