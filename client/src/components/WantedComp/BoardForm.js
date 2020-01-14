@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Input, Button } from 'semantic-ui-react';
 
 class BoardForm extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -31,9 +32,9 @@ class BoardForm extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input placeholder="title" ref={node => this.brdtitle = node} />
-                <input placeholder="name" ref={node => this.brdwriter = node} />
-                <button type="submit">Save</button>
+                <Input placeholder="title" ref={node => this.brdtitle = node} />
+                <Input placeholder="name" ref={node => this.brdwriter = node} />
+                <Button type="submit">Save</Button>
             </form>
         );
     }

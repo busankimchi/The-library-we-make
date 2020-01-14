@@ -72,12 +72,12 @@ class Home extends Component {
 }
 
 const rotate360 = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 `
 const Wheal = styled.div`
     position: absolute;
@@ -91,12 +91,12 @@ const Wheal = styled.div`
 `;
 
 const Container = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(${process.env.PUBLIC_URL + '/sample.png'});
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(${process.env.PUBLIC_URL + '/sample.png'});
 `;
 
 const Positioner = styled.div`

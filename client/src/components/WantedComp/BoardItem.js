@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { Table, Button } from 'semantic-ui-react';
+import BoardEditItem from './BoardEditItem';
+import { ThemeConsumer } from 'styled-components';
+
 
 class BoardItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editDialog: false,
+        }
+    }
+
     handleRemove = () => {
         const { row, onRemove } = this.props;
         onRemove(row.brdno);
@@ -13,13 +24,17 @@ class BoardItem extends Component {
 
     render() {
         return (
-            <tr>
-                <td>{this.props.row.brdno}</td>
-                <td><a onClick={this.handleSelectRow}>{this.props.row.brdtitle}</a></td>
-                <td>{this.props.row.brdwriter}</td>
-                <td>{this.props.row.brddate.toLocaleDateString('ko-KR')}</td>
-                <td><button onClick={this.handleRemove}>X</button></td>
-            </tr>
+            <>
+                <BoardEditItem editDialog={this.state.editDialog} />
+
+                <Table.Row onClick={() => this.setState({ editDialog: !this.state.editDialog })}>
+                    <Table.Cell>{this.props.row.brdno}</Table.Cell>
+                    <Table.Cell>{this.props.row.brdTitle}</Table.Cell>
+                    <Table.Cell>{this.props.row.brdID}</Table.Cell>
+                    <Table.Cell>{this.props.row.brddate.toLocaleDateString('ko-KR')}</Table.Cell>
+                    <Table.Cell><Button onClick={this.handleRemove}>X</Button></Table.Cell>
+                </Table.Row>
+            </>
         );
     }
 }

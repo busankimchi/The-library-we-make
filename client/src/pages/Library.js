@@ -10,18 +10,12 @@ const extra = (
 
 
 const Book = (props) => (
-    <Popup
-        content='Sample'
-        trigger={
-            <Card
-                image='https://react.semantic-ui.com/images/avatar/large/matthew.png'
-                header='Elliot Baker'
-                meta='Friend'
-                description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-                extra={extra} />
-        }
-        position='right center'
-    />
+    <Card
+    image='https://react.semantic-ui.com/images/avatar/large/matthew.png'
+    header='Elliot Baker'
+    meta='Friend'
+    description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
+    extra={extra} />   
 );
 
 
@@ -40,7 +34,7 @@ class Library extends Component {
     }
 
     getBookList = () => {
-        this.setState()
+        this.setState();
     }
 
     componentWillMount() {

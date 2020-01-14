@@ -28,10 +28,12 @@ router.post("/register", (req, res) => {
   console.log(1234);
   User.findOne({ email: req.body.email }).then(user => {
     console.log(111);
+    
     if (user) {
       console.log("ee");
       return res.status(400).json({ email: "Email already exists" });
-    } else {
+    }
+    else {
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -45,8 +47,7 @@ router.post("/register", (req, res) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
-          newUser
-            .save()
+          newUser.save()
             .then(user => res.json(user))
             .catch(err => console.log(err));
         });
@@ -86,7 +87,7 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           username: user.username
-          
+
         };
 
         // Sign token

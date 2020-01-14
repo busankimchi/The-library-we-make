@@ -9,10 +9,10 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
       auth.isAuthenticated === true ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/pages/main" />
-      )
+          <Redirect to="/pages/main" />
+        )
     }
-    //될지모르겠다.
+  //될지모르겠다.
   />
 );
 PrivateRoute.propTypes = {
