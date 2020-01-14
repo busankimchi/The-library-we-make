@@ -65,7 +65,7 @@ router.get("/image", (req,res) =>{
 
     // console.log(res.body);
     Book.find({}, function(err, docs){
-      
+
         jsonString=JSON.stringify(docs);
         json=JSON.parse(jsonString);
         console.log(json[0]);
@@ -80,7 +80,7 @@ router.get("/image", (req,res) =>{
 
 router.get("/", (req, res) => {
         Book.find({}, function(err, docs) {
-        if (!err){ 
+        if (!err){
             // var myPosts = JSON.parse(JSON.stringify(docs));
             // res.send(myPosts);
             res.json(docs);
@@ -169,9 +169,9 @@ router.post('/borrow', (req, res)=>{
         }else{
             throw err;
         }
-       
+
     })
-    
+
 })
 
 
@@ -180,7 +180,3 @@ router.post('/borrow', (req, res)=>{
 
 module.exports = router;
 // router.post("/")
-
-
-
-

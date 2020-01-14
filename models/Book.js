@@ -20,14 +20,16 @@ const BookSchema = new Schema({
     unique: true
     //required?
   },
-
+    imageURL:{
+      type: String
+    },
   image:{
-    type: String
-  // },
+    data: {type: Buffer},
+    contentType: {type: String}
+     },
     // required: true
     // type: String,
     // default: "client/src/images/book.png"
-  },
   name: {
     type: String,
     required: true
@@ -55,12 +57,7 @@ const BookSchema = new Schema({
   register_user: {
     type: String,
     required: false
-  },
-  register_userid: {
-    type: String,
-    required: false
-  },
-  //추가 할 것.
+  }, //추가 할 것.
   // borrower: {
   //   type: String,
   //   required: false

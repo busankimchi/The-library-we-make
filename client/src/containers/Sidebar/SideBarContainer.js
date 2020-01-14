@@ -25,6 +25,7 @@ class SideBarContainer extends Component {
     }
 
     onLogoutClick = e => {
+      console.log(123)
         e.preventDefault();
         this.props.logoutUser();
     };
