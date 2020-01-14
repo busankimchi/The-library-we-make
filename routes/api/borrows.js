@@ -21,7 +21,7 @@ router.post("/borrow", (req, res)=>{
     });  
 });
 
-router.get('/:QRid', (req, res) =>{
+router.get("/:QRid", (req, res) =>{
     // console.log(req.params.QRid)
     Borrow.findOne({QRid: req.params.QRid}, function(err, docs){
         if(!err){
@@ -32,8 +32,8 @@ router.get('/:QRid', (req, res) =>{
     })
 });
 
-router.delete('/:QRid', (req, res)=>{
-    Borrow.remove({QRid: req.params.QRid}, (err, output)=> {
+router.delete("/:QRid", (req, res)=>{
+    Borrow.remove({QRid: req.params.QRid}, (err, output) => {
         if(!err){
             // if(!output.result.n) {
             //     return res.status(404).json({error: "book not found"});
@@ -43,3 +43,6 @@ router.delete('/:QRid', (req, res)=>{
         }
     })
 })
+
+
+module.exports = router;

@@ -23,7 +23,7 @@ class Regibooks extends Component {
             author: "",
             subject: "",
             subject_category: "과목을 선택해주세여",
-            register_user: "",
+            register_user: "", //이걸 유저정보로.
             pictures: [],
             errors: {}
         };
@@ -68,7 +68,10 @@ class Regibooks extends Component {
     }
 
     render() {
-        console.log(this.state);
+        const {user}=this.props.auth;
+        console.log(user.username)
+
+        // console.log(this.state.auth);
         const { errors } = this.state;
         return (
             <RegiContent title="Take a picture of your book">
@@ -138,7 +141,8 @@ Regibooks.propTypes = {
     registerBook: PropTypes.func.isRequired,
     findBook: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+
 };
 
 const mapStateToProps = state => ({

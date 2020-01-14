@@ -16,7 +16,8 @@ const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
   QRid:{
-    type: Number
+    type: Number,
+    unique: true
     //required?
   },
   imageURL:{
