@@ -55,7 +55,7 @@ class Register extends Component {
 
 
   render() {
-    console.log("register");
+    // console.log("register");
     const { errors } = this.state;
     return (
       <AuthContent title="회원가입">

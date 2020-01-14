@@ -20,13 +20,9 @@ const BookSchema = new Schema({
     unique: true
     //required?
   },
-  imageURL:{
-    type:String,
-    default:"client/src/images/book.png"
-  },
+
   image:{
-    data: {type: Buffer},
-    contentType: {type: String} 
+    type: String
   // },
     // required: true
     // type: String,
