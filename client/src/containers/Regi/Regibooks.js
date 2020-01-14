@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { RegiContent, InputWithLabel, RegiButton } from 'components/Regibooks';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from "react-router-dom";
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';

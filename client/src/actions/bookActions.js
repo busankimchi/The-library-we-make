@@ -20,21 +20,10 @@ export const findBook = (QRid, history) => dispatch => {
     getData().then(function(resolvedData) {
         if(resolvedData.data == null) {
             console.log("not in library");
-            
         }
         else {
             console.log("already in library");
             history.push("/main/borrow/"+resolvedData.data.QRid);
         }
     });
-    
-    
-
-
-    // .then(res => history.push("/main"))
-    // .catch(err =>
-    //     dispatch({
-    //         payload: err.response.data
-    //     })
-    // );
 }

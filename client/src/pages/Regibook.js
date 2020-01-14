@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerBook, findBook } from "../actions/bookActions";
 import styled from 'styled-components';
+import { Borrow } from 'pages';
 // import Main from 'pages/Main';
 
 
@@ -42,7 +43,7 @@ class Regibook extends Component {
                 ) : (
                         <RegiWrapper>
                             <Route path="/main/register/:id" component={Regibooks} />
-                            <Route path="/main/borrow/:id" component={Borrowbooks} />
+                            <Route path="/main/borrow/:id" component={Borrow} />
                         </RegiWrapper>
                     )
                 }
