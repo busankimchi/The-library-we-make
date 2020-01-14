@@ -47,6 +47,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
+    // console.log(1326);
     this.props.loginUser(userData);
     console.log(userData);
   };
@@ -100,6 +101,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  
   errors: state.errors
 });
 

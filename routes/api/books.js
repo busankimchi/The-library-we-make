@@ -128,6 +128,18 @@ router.get('/:book_id', (req, res) =>{
     })
 });
 
+//QR로 검색: getQR
+router.get('/getQR/:QRid', (req, res) =>{
+    // console.log(req.params.book_id)
+    Book.find({QRid: req.params.QRid}, function(err, docs){
+        if(!err){
+            res.json(docs);
+        }else{
+            throw err;
+        }
+    })
+});
+
 router.get('/:book_register_user', (req, res) =>{
     // console.log(req.params.book_id)
     Book.find({_id: req.params.book_register_user}, function(err, docs){
@@ -138,6 +150,30 @@ router.get('/:book_register_user', (req, res) =>{
         }
     })
 });
+
+//빌리고 현재 소유자 설정
+router.put('/borrow/:QRid', (req, res)=>{
+    console.log(123456)
+
+    Book.findOne({QRid: req.params.QRid}, (err, docs)=>{
+        if(!err){
+            // const docs=doc[0]
+            // console.log(typeof: docs)
+            docs.status=req.body.status;
+            docs.current_user=req.body.current_user;
+
+            docs.save()
+            .then(docs=> res.json(docs))
+            .catch(err => console.log(err))
+        }else{
+            throw err;
+        }
+       
+    })
+    
+})
+
+
 
 
 

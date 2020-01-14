@@ -17,7 +17,7 @@ const BorrowSchema=new Schema({
     // },
     borrow_start: {
         type: Date,
-        required: true
+        default: Date.now
     },
     borrow_end:{
         type: Date,

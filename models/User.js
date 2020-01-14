@@ -17,8 +17,12 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  point:{
+    type:Number,
+    default:10000
   }
-
+  
   // list : [
   //   info: {
   //     person : String,
