@@ -17,30 +17,30 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-  // console.log("postpost");
+
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
   if (!isValid) {
-    console.log('에러다');
     return res.status(400).json(errors);
   }
-  console.log(1234);
+
   User.findOne({ email: req.body.email }).then(user => {
+<<<<<<< HEAD
     console.log(111);
     
+=======
+>>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
     if (user) {
-      console.log("ee");
       return res.status(400).json({ email: "Email already exists" });
     }
     else {
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        point: req.body.point
       });
-
-      console.log(newUser);
 
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
@@ -87,7 +87,10 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           username: user.username
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
         };
 
         // Sign token
@@ -112,5 +115,13 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+// router.get('/logout', (req, res) =>{
+//   console.log(123);
+// req.session
+//   // req.logout();
+//   res.redirect('/login');
+// });
+
 
 module.exports = router;

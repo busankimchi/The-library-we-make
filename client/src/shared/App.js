@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Home, Auth ,Main} from 'pages';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeReactComponent from './MyAwesomeReactComponent';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "actions/authActions";
@@ -11,7 +10,6 @@ import { setCurrentUser, logoutUser } from "actions/authActions";
 import { Provider } from "react-redux";
 import store from "../store";
 import PrivateRoute from "components/private-route/PrivateRoute";
-import Dashboard from "components/dashboard/Dashboard";
 
 if (localStorage.jwtToken) {
     // Set auth token header auth
@@ -42,8 +40,12 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/auth" component={Auth} />
                         <Route path="/main" component={Main} />
+                        <Switch>
+                            <PrivateRoute exact path="/main" component={Main} />
+                        </Switch>
                     </div>
                 </MuiThemeProvider>
+
             </Provider>
         );
     }

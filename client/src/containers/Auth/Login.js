@@ -9,6 +9,7 @@ import classnames from "classnames";
 
 class Login extends Component {
 
+
   constructor() {
     super();
     this.state = {
@@ -46,6 +47,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
+    // console.log(1326);
     this.props.loginUser(userData);
     console.log(userData);
   };
@@ -53,7 +55,6 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
       <AuthContent title="로그인">
         <InputWithLabel
@@ -100,6 +101,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  
   errors: state.errors
 });
 

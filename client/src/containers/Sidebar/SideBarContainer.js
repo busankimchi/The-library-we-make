@@ -1,6 +1,10 @@
 import React, { Component, Fragment, useState } from 'react';
 import { Header, Icon, Image, Menu, Segment, Sidebar, Grid, Dropdown, Button, Divider, Popup, List } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+import PropTypes from "prop-types";
+
 
 
 class SideBarContainer extends Component {
@@ -19,6 +23,7 @@ class SideBarContainer extends Component {
 
     BorrowedBookList = () => {
 
+<<<<<<< HEAD
     }
 
     render() {
@@ -29,6 +34,21 @@ class SideBarContainer extends Component {
             </>
         );
 
+=======
+class SideBarContainer extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {};
+    // }
+
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
+      
+    render() {
+        // const { user } = this.props.auth;
+>>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
         return (
             <Sidebar.Pushable as={Segment}>
                 <Sidebar
@@ -87,12 +107,26 @@ class SideBarContainer extends Component {
                     </Menu.Item>
 
                     <Menu.Item as='a'>
+<<<<<<< HEAD
                         <Icon name='sticky note outline' />
                         Check Notes
                     </Menu.Item>
 
                     <Menu.Item
                         onClick={this.signOut}>
+=======
+                        <Icon.Group>
+                            <Icon name='sticky note' 
+          
+                            />
+                            <Icon corner='bottom right' name='arrow left' />
+                        </Icon.Group>
+                        Check Note
+                    </Menu.Item>
+
+                    <Menu.Item
+                        onClick={this.onLogoutClick}>
+>>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
                         <Icon name='sign out' />
                         Sign Out
                     </Menu.Item>
@@ -111,6 +145,16 @@ class SideBarContainer extends Component {
 const StyledSidebarContainer = styled(SideBarContainer)`
     height: 900px;
 `
+SideBarContainer.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
 
-export default SideBarContainer;
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
 
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(SideBarContainer);
