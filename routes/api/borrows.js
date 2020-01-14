@@ -21,7 +21,7 @@ router.post("/borrow", (req, res)=>{
     });  
 });
 
-router.get(":QRid", (req, res) =>{
+router.get("/:QRid", (req, res) =>{
     // console.log(req.params.QRid)
     Borrow.findOne({QRid: req.params.QRid}, function(err, docs){
         if(!err){
