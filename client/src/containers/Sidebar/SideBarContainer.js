@@ -47,36 +47,10 @@ class SideBarContainer extends Component {
                         {user.username}
                     </Menu.Item>
 
-                    <Menu.Item as={Popup}
-                        trigger={<Icon name='book' size='big' inverted />}
-                        position='right center'>
-
-                        Uploaded Books
-                    </Menu.Item>
-
-
-
                     <Menu.Item as='a'>
-                        <Popup
-                            trigger={<Icon name='book' size='big' inverted />}
-                            position='right center'
-                            offset='0, 50px'>
-
-                        </Popup>
-                        <Icon name='book' size='big' inverted />
+                        <Icon name='book' />
                         Uploaded Books
                     </Menu.Item>
-
-                    <Menu.Item as={Button}>
-                        <Popup
-                            trigger={<Icon name='book' size='big' inverted />}
-                            position='right center'
-                            offset='0, 50px'>
-
-                        </Popup>
-                        Uploaded Books
-                    </Menu.Item>
-
 
                     <Menu.Item as='a'>
                         <Icon name='bookmark' />

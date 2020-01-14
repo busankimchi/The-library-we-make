@@ -16,18 +16,17 @@ function BookData(data) {
 }
 
 const Book = (props) => {
-    console.log(props.book.image.data.data[2]);
 
     return (
         <Popup
             content='연락하기'
             trigger={
                 <Card
+                    //image={`data:image/jpeg;base64,${props.book.image.data.data}`}
                     header={props.book.name}
                     meta={"저자: "+ props.book.author}
                     description={"과목: "+props.book.subject}
                 >
-                    <img src={`data:image/jpeg;base64,${props.book.image.data}`} />
                 </Card>
             }
             position='right center'
