@@ -97,15 +97,7 @@ const rotate360 = keyframes`
         transform: rotate(360deg);
     }
 `
-const Container = styled.div`
-            position: absolute;
-            top: 0%;
-            left: 0%;
-            display: flex;
-            width: 100%;
-            height: 100%;
-            background: url(${process.env.PUBLIC_URL + '/sample.png'});
-`;
+
 const Wheal = styled.div`
     position: absolute;
     top: 30%;
@@ -117,7 +109,6 @@ const Wheal = styled.div`
     animation: ${rotate360} infinite 15s linear;
 `;
 
-<<<<<<< HEAD
 const Container = styled.div`
     position: absolute;
     top: 0;
@@ -126,11 +117,6 @@ const Container = styled.div`
     height: 100%;
     background: url(${process.env.PUBLIC_URL + '/sample.png'});
 `;
-=======
-
-
-
->>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
 
 const Positioner = styled.div`
     position: absolute;

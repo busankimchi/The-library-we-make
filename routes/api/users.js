@@ -26,11 +26,6 @@ router.post("/register", (req, res) => {
   }
 
   User.findOne({ email: req.body.email }).then(user => {
-<<<<<<< HEAD
-    console.log(111);
-    
-=======
->>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     }
@@ -87,10 +82,6 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           username: user.username
-<<<<<<< HEAD
-
-=======
->>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
         };
 
         // Sign token

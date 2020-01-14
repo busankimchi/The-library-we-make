@@ -10,26 +10,25 @@ import Divider from '@material-ui/core/Divider';
 
 import styled from 'styled-components';
 
-class BoardEditItem extends Component {
+class BoardEditItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: this.props.openDialog,
             ID: "",
-            brdID: this.props.brdID,
-            brdTitle: this.props.brdTitle,
-            brdText: this.props.brdText,
+            // brdID: this.props.brdID,
+            // brdTitle: this.props.brdTitle,
+            // brdText: this.props.brdText,
         }
-        
         this.handleClose = this.handleClose.bind(this);
         this.saveText = this.saveText.bind(this);
         this.saveTitle = this.saveTitle.bind(this);
     }
-    
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({open: false})
     };
+    
 
     saveTitle = (e) => {
         console.log(e.target.value);
@@ -42,7 +41,7 @@ class BoardEditItem extends Component {
     }
 
     uploadPost = (e) => {
-        console.log(`id: ${this.state.id} title: ${this.state.title} text: ${this.state.text}`);
+        console.log(`id: ${this.state.ID} title: ${this.state.title} text: ${this.state.text}`);
         e.preventDefault();
         const data = {
             brdID: this.state.ID,
@@ -57,11 +56,12 @@ class BoardEditItem extends Component {
 
 
     render() {
+        console.log(this.props.openDialog);
         console.log(this.state.open);
 
         return (
             <Dialog open={this.state.open} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">New Post</DialogTitle>
+                <DialogTitle id="form-dialog-title">Edit Post</DialogTitle>
                 <DialogContent>
                     <DialogContentText>Name</DialogContentText>
 

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,7 +18,7 @@ class BoardNewItem extends Component {
         super(props);
         this.state = {
             open: false,
-            ID: "",
+            ID: `${this.props.ID.username} (${this.props.ID.id})`,
             title: "",
             text: "",
         }
@@ -44,7 +47,7 @@ class BoardNewItem extends Component {
     }
 
     uploadPost = (e) => {
-        console.log(`id: ${this.state.id} title: ${this.state.title} text: ${this.state.text}`);
+        console.log(`id: ${this.state.ID} title: ${this.state.title} text: ${this.state.text}`);
 
         e.preventDefault();
         
@@ -76,7 +79,7 @@ class BoardNewItem extends Component {
                 <Dialog open={this.state.open} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">New Post</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>Name</DialogContentText>
+                        <DialogContentText>{this.state.ID}</DialogContentText>
 
                         <TextField
                             autoFocus
@@ -124,4 +127,17 @@ const ButtonContainer = styled(Button)`
     margin: 0 auto;
 `
 
-export default BoardNewItem;
+//export default BoardNewItem;
+
+
+BoardNewItem.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+)(BoardNewItem);

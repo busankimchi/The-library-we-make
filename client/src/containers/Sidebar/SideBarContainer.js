@@ -22,33 +22,15 @@ class SideBarContainer extends Component {
     }
 
     BorrowedBookList = () => {
-
-<<<<<<< HEAD
     }
-
-    render() {
-        const UploadedIcon = (
-            <>
-                <Icon name='book' size='big' inverted />
-                Uploaded Books
-            </>
-        );
-
-=======
-class SideBarContainer extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {};
-    // }
 
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
-      };
-      
+    };
+
     render() {
-        // const { user } = this.props.auth;
->>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
+        const { user } = this.props.auth;
         return (
             <Sidebar.Pushable as={Segment}>
                 <Sidebar
@@ -62,7 +44,7 @@ class SideBarContainer extends Component {
                     <Menu.Item>
                         <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' size='small' />
                         <Divider />
-                        Name
+                        {user.username}
                     </Menu.Item>
 
                     <Menu.Item as={Popup}
@@ -107,33 +89,19 @@ class SideBarContainer extends Component {
                     </Menu.Item>
 
                     <Menu.Item as='a'>
-<<<<<<< HEAD
-                        <Icon name='sticky note outline' />
+                        <Icon name='sticky note' />
                         Check Notes
                     </Menu.Item>
 
                     <Menu.Item
-                        onClick={this.signOut}>
-=======
-                        <Icon.Group>
-                            <Icon name='sticky note' 
-          
-                            />
-                            <Icon corner='bottom right' name='arrow left' />
-                        </Icon.Group>
-                        Check Note
-                    </Menu.Item>
-
-                    <Menu.Item
                         onClick={this.onLogoutClick}>
->>>>>>> 7f6fa2756b36709f6ef93727b410c5e41434de3b
                         <Icon name='sign out' />
                         Sign Out
                     </Menu.Item>
                 </Sidebar>
                 <Sidebar.Pusher
-                    //dimmed={this.props.visible}
-                    >
+                //dimmed={this.props.visible}
+                >
                     {this.props.children}
                 </Sidebar.Pusher>
 
@@ -148,13 +116,13 @@ const StyledSidebarContainer = styled(SideBarContainer)`
 SideBarContainer.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
-  };
+};
 
-  const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     auth: state.auth
-  });
+});
 
-  export default connect(
+export default connect(
     mapStateToProps,
     { logoutUser }
-  )(SideBarContainer);
+)(SideBarContainer);

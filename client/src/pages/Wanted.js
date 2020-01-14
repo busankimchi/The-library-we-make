@@ -93,6 +93,7 @@ class Wanted extends Component {
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from "react-redux";
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -145,7 +146,6 @@ const EnhancedTableHead = () => (
     </TableHead>
 );
 
-
 EnhancedTableHead.propTypes = {
     classes: PropTypes.object.isRequired,
     rowCount: PropTypes.number.isRequired,
@@ -197,11 +197,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-class Wanted extends Component {
-    constructor(props) {
-        super(props);
+class Wanted extends React.Component {
+    constructor() {
+        super();
         this.state = {
-            //selected: [],
             page: 0,
             rowsPerPage: 5,
             maxNo: 3,
@@ -222,7 +221,13 @@ class Wanted extends Component {
                 }
             ],
             isDialogOpen: false,
+            temp: "",
+            selected: {}
         }
+        this.handleSaveData = this.handleSaveData.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChangePage = this.handleChangePage.bind(this);
+        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
     }
 
     classes = () => useStyles();
@@ -233,58 +238,46 @@ class Wanted extends Component {
                 maxNo: this.state.maxNo + 1,
                 boards: this.state.boards.concat({ brdno: this.state.maxNo, brddate: new Date(), ...data }),
             });
-        } else {                                                        // Update
+        }
+        else {                                                        // Update
             this.setState({
                 boards: this.state.boards.map(row => data.brdno === row.brdno ? { ...data } : row),
             })
         }
     }
 
-    handleRemove = (brdno) => {
+    handleRemove = brdno => {
         this.setState({
-            boards: this.state.boards.filter(row => row.brdno !== brdno)
+            boards: this.state.boards.filter(row => row.brdno !== brdno),
         })
     }
 
+    handleClick = (e) => {
+        this.setState({ isDialogOpen: true });
+        this.setState({ selected: e.target });
+        // console.log(e.target);
+        this.state.temp = this.state.isDialogOpen
+    };
+
+    
+
+    handleChangePage = (event, newPage) => {
+        this.setState({ page: newPage });
+    };
+
+    handleChangeRowsPerPage = event => {
+        this.setState({ rowsPerPage: parseInt(event.target.value, 10) });
+        this.setState({ page: 0 });
+    };
+
     render() {
-        const handleClick = (event, name) => {
-            /*
-            const selectedIndex = this.state.selected.indexOf(name);
-            let newSelected = [];
-
-            if (selectedIndex === -1)
-                newSelected = newSelected.concat(this.state.selected, name);
-            else if (selectedIndex === 0)
-                newSelected = newSelected.concat(this.state.selected.slice(1));
-            else if (selectedIndex === this.state.selected.length - 1)
-                newSelected = newSelected.concat(this.state.selected.slice(0, -1));
-            else if (selectedIndex > 0) {
-                newSelected = newSelected.concat(
-                    this.state.selected.slice(0, selectedIndex),
-                    this.state.selected.slice(selectedIndex + 1),
-                );
-            }
-            this.setState({ selected: newSelected });
-            */
-            this.setState({ isDialogOpen: true });
-            console.log(this.state.isDialogOpen);
-        };
-
-        const handleChangePage = (event, newPage) => {
-            this.setState({ page: newPage });
-        };
-
-        const handleChangeRowsPerPage = event => {
-            this.setState({ rowsPerPage: parseInt(event.target.value, 10) });
-            this.setState({ page: 0 });
-        };
-
         const emptyRows = this.state.rowsPerPage - Math.min(this.state.rowsPerPage, this.state.boards.length - this.state.page * this.state.rowsPerPage);
 
+        console.log(this.state.isDialogOpen);
         return (
             <div className={this.classes.root}>
-                <BoardNewItem onSaveData={this.handleSaveData} />
-                <BoardEditItem openDialog={this.state.isDialogOpen} />
+                <BoardNewItem onSaveData={this.handleSaveData} ID={this.props.auth.user} />
+                <BoardEditItem openDialog={this.state.temp} />
 
                 <Paper className={this.classes.paper}>
                     <EnhancedTableToolbar />
@@ -308,7 +301,7 @@ class Wanted extends Component {
                                             return (
                                                 <TableRow
                                                     hover
-                                                    onClick={event => handleClick(event, row.brdno)}
+                                                    onClick={this.handleClick}
                                                     role="checkbox"
                                                     tabIndex={-1}
                                                     key={row.brdno}>
@@ -336,18 +329,32 @@ class Wanted extends Component {
                     </TableContainer>
 
                     <TablePagination
-                        rowsPerPageOptions={[5, 10, 15, 20, 25]}
+                        rowsPerPageOptions={[5, 10]}
                         component="div"
                         count={this.state.boards.length}
                         rowsPerPage={this.state.rowsPerPage}
                         page={this.state.page}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage} />
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage} />
                 </Paper>
-            </div>
-        );
+            </div>);
+
+
     }
 }
 
 
-export default Wanted;
+//export default Wanted;
+
+
+Wanted.propTypes = {
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(
+    mapStateToProps,
+)(Wanted);
