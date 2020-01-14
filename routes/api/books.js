@@ -91,9 +91,9 @@ router.get("/", (req, res) => {
 })
 
 //QR로 검색
-router.get('/:QRid', (req, res) =>{
-    console.log(req.params.QRid)
-    Book.findOne({QRid: req.params.QRid}, function(err, docs){
+router.post('/find', (req, res) =>{
+    // console.log(req.body.QRid)
+    Book.findOne({QRid: req.body.QRid}, function(err, docs){
         if(!err){
             res.json(docs);
         }else{

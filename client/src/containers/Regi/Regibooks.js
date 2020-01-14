@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { RegiContent, InputWithLabel, RegiButton } from 'components/Regibooks';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link, withRouter } from "react-router-dom";
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import ImageUploader from 'react-images-upload';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { registerBook, findBook } from "../../actions/bookActions";
+
 // import { registerUser } from "../../actions/authActions";
 
 
@@ -16,7 +19,7 @@ class Regibooks extends Component {
     constructor() {
         super();
         this.state = {
-            qrid: "",
+            QRid: "",
             name: "",
             author: "",
             subject: "",
@@ -26,6 +29,9 @@ class Regibooks extends Component {
             errors: {}
         };
         this.onDrop = this.onDrop.bind(this);
+    }
+    componentWillMount() {
+        this.props.findBook({ QRid: this.props.match.params.id }, this.props.history)
     }
     handleChange = (event, index, subject_category) => this.setState({ subject_category });
     // componentDidMount() {
@@ -43,18 +49,24 @@ class Regibooks extends Component {
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
-    // onSubmit = e => {
-    //     e.preventDefault();
-    //     const newUser = {
-    //         username: this.state.username,
-    //         email: this.state.email,
-    //         password: this.state.password,
-    //         password2: this.state.password2
-    //     };
-    //     console.log(newUser);
-    //     this.props.registerUser(newUser, this.props.history);
-    // };
+    onSubmit = e => {
+        console.log("submit")
+        e.preventDefault();
+        const newBook = {
+            QRid: this.props.match.params.id,
+            name: this.state.name,
+            author: this.state.author,
+            subject: this.state.subject,
+            subject_category: this.state.subject_category,
+            // register_user: this.state.register_user,
+        };
+        this.props.registerBook(newBook, this.props.history);
 
+    };
+
+    Setting() {
+        this.setState({ qrid: this.props.match.params.id });
+    }
 
     render() {
         console.log(this.state);
@@ -113,26 +125,31 @@ class Regibooks extends Component {
                 </form>
             </RegiContent>
         );
+
     }
 }
-export default Regibooks;
 
 const styles = {
     customWidth: {
         width: 200,
     },
 };
-// Register.propTypes = {
-//     registerUser: PropTypes.func.isRequired,
-//     auth: PropTypes.object.isRequired,
-//     errors: PropTypes.object.isRequired
-// };
-// const mapStateToProps = state => ({
-//     auth: state.auth,
-//     errors: state.errors
-// });
 
-// export default connect(
-//     mapStateToProps,
-//     { registerUser }
-// )(withRouter(Register));
+Regibooks.propTypes = {
+    registerBook: PropTypes.func.isRequired,
+    findBook: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+});
+
+
+export default connect(
+    mapStateToProps,
+    { registerBook, findBook }
+)(withRouter(Regibooks));
+

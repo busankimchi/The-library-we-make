@@ -96,7 +96,7 @@ class Main extends Component {
                                 <Route exact path="/main" component={Library} />
                                 <Route path="/main/wanted" component={Wanted} />
                                 <Route path="/main/borrow" component={Borrow} />
-                                <Route path="/main/register" component={Regibook} />
+                                <Route path="/main/register/:id" component={Regibook} />
                             </Container>
                         </div>
                     </MainContainer>
