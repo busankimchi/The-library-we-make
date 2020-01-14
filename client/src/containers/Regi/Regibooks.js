@@ -21,7 +21,7 @@ class Regibooks extends Component {
             author: "",
             subject: "",
             subject_category: "과목을 선택해주세여",
-            register_user: "",
+            register_user: "", //이걸 유저정보로.
             pictures: [],
             errors: {}
         };
