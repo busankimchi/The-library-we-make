@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { Library, Wanted, Borrow, Regibook } from 'pages';
-import SideBarProfile from 'components/SideBarProfile';
+
 
 import styled from 'styled-components';
 
@@ -94,9 +94,10 @@ class Main extends Component {
                         </Navbar>
                         <div>
                             <Container>
+                                <Wheal></Wheal>
                                 <Route exact path="/main" component={Library} />
                                 <Route path="/main/wanted" component={Wanted} />
-                                <Route path="/main/borrow" component={Borrow} />
+                                <Route path="/main/borrow/:id" component={Borrow} />
                                 <Route path="/main/register/:id" component={Regibook} />
                             </Container>
                         </div>
@@ -114,6 +115,15 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background: url(${process.env.PUBLIC_URL + '/sample2.png'});
+`;
+const Wheal = styled.div`
+    position: absolute;
+    top: 85%;
+    left: 8%;
+    width: 300px;
+    height: 201px;
+    transform: translate(-50%, -50%);
+    background: url(${process.env.PUBLIC_URL + '/mainlogov3.png'});
 `;
 
 const MainContainer = styled.div`

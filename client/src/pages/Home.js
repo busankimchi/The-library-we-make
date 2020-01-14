@@ -71,6 +71,7 @@ class Home extends Component {
             <div>
                 <Container>
                     <Wheal></Wheal>
+                    <Wheal2></Wheal2>
                     <Positioner>
                         <ShadowedBox>
                             <Link to="/auth/login">
@@ -97,7 +98,39 @@ const rotate360 = keyframes`
         transform: rotate(360deg);
     }
 `
+const fadeIn = keyframes`
+  from {
+    transform: scale(.25);
+    opacity: 0;
+  }
 
+  to {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  from {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(.25);
+    opacity: 1;
+  }
+`;
+
+const Container = styled.div`
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background: url(${process.env.PUBLIC_URL + '/sample.png'});
+`;
 const Wheal = styled.div`
     position: absolute;
     top: 30%;
@@ -109,14 +142,20 @@ const Wheal = styled.div`
     animation: ${rotate360} infinite 15s linear;
 `;
 
-const Container = styled.div`
+
+const Wheal2 = styled.div`
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(${process.env.PUBLIC_URL + '/sample.png'});
+    top: 6%;
+    left: 6%;
+    width: 300px;
+    height: 201px;
+    transform: translate(-50%, -50%);
+    background: url(${process.env.PUBLIC_URL + '/mainlogov3.png'});
+    animation: ${props => props.out ? fadeOut : fadeIn} 3s linear infinite;
 `;
+
+
+
 
 const Positioner = styled.div`
     position: absolute;

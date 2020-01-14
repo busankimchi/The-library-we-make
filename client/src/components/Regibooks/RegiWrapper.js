@@ -7,7 +7,7 @@ import { cyan400 } from 'material-ui/styles/colors';
 // 화면의 중앙에 위치시킨다
 const Positioner = styled.div`
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
   
@@ -27,7 +27,7 @@ const ShadowedBox = styled.div`
 // 로고
 const LogoWrapper = styled.div`
     background: ${cyan400};
-    height: 5rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,14 +35,14 @@ const LogoWrapper = styled.div`
     border-top-right-radius: 35px;
 `;
 
-const Logo = styled(Link)
-    `
-    color: white;
-    font-family: 'Rajdhani';
-    font-size: 2.4rem;
-    letter-spacing: 5px;
-    text-decoration: none;
-`;
+// const Logo = styled(Link)
+//     `
+//     color: white;
+//     font-family: 'Rajdhani';
+//     font-size: 2.4rem;
+//     letter-spacing: 5px;
+//     text-decoration: none;
+// `;
 
 // children 이 들어가는 곳
 const Contents = styled.div`
@@ -58,7 +58,7 @@ const RegiWrapper = ({ children }) => (
         <Container>
             <ShadowedBox>
                 <LogoWrapper>
-                    <Logo to="/" > Register your book!</Logo>
+                    <h3 align ="center" style ={{color: "white"}}>Register your book!</h3>
                 </LogoWrapper>
                 <Contents>
                     {children}
